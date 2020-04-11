@@ -12,12 +12,14 @@ public class IntegerInversion {
      * 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
      * */
     public static void main(String[] args) {
-//        int res = run(-2147483648);
-//        int secondRes = secondRun(123);
+        int res = run(-2147483648);
+        int secondRes = secondRun(123);
         int thirdRes = thirdRun(1534236469);
-//        System.out.println(res);
-//        System.out.println(secondRes);
+        int fourthRes = fourthRun(-2147483412);
+        System.out.println(res);
+        System.out.println(secondRes);
         System.out.println(thirdRes);
+        System.out.println(fourthRes);
     }
 
     /**
@@ -88,20 +90,49 @@ public class IntegerInversion {
         return 0;
     }
 
+    /**
+     * 数学算法, 每次进行取模运算, 得到最后一个数字
+     * 然后进行组装
+     * */
     private static int thirdRun(int num) {
-        int rev = 0;
         int res = 0;
-        while (true) {
-            rev = num % 10;
-            res = res * 10 + rev;
-            if (res > Integer.MAX_VALUE || res < Integer.MIN_VALUE) {
+        while (num != 0) {
+            int rev = num % 10;
+            num /= 10;
+            if (res > Integer.MAX_VALUE / 10 || (res == Integer.MAX_VALUE / 10 && rev > 7)) {
                 return 0;
             }
-            num /= 10;
-            if (num == 0) {
-                break;
+            if (res < Integer.MIN_VALUE / 10 || (res == Integer.MIN_VALUE / 10 && rev < -8)) {
+                return 0;
             }
+            res = res * 10 + rev;
         }
+        return res;
+    }
+
+    private static int fourthRun(int num) {
+        if (num == 0) {
+            return 0;
+        }
+        boolean flag = num < 0;
+        long longNum = flag ? num * -1 : num;
+        List<Long> numList = new ArrayList<>();
+        while (longNum != 0) {
+            numList.add(longNum % 10);
+            longNum /= 10;
+        }
+        int res = Math.toIntExact(numList.get(0));
+        for (int i = 1; i < numList.size(); i++) {
+            if (res > Integer.MAX_VALUE / 10) {
+                return 0;
+            }
+            res *= 10;
+            if (res > Integer.MAX_VALUE - Math.toIntExact(numList.get(i))) {
+                return 0;
+            }
+            res += Math.toIntExact(numList.get(i));
+        }
+        res = flag ? -1 * res : res;
         return res;
     }
 }
