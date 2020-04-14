@@ -16,9 +16,11 @@ public class LongestCommonPrefix {
         String res = longestCommonPrefix(str);
         String res2 = longestCommonPrefix2(str);
         String res3 = longestCommonPrefix3(str);
+        String res4 = longestCommonPrefix4(str);
         System.out.println(res);
         System.out.println(res2);
         System.out.println(res3);
+        System.out.println(res4);
     }
 
     /**
@@ -99,5 +101,50 @@ public class LongestCommonPrefix {
             }
         }
         return perStr;
+    }
+
+
+    /**
+     * 分治法
+     * 拆分数组为两组, 分别取两组的公共前缀. 同时处理
+     * */
+    private static String longestCommonPrefix4(String[] str) {
+        if (str == null || str.length <= 0) {
+            return "";
+        }
+        return loopCommonPrefix(str, 0, str.length - 1);
+    }
+    private static String loopCommonPrefix(String[] str, int l, int r) {
+        if (l == r) {
+            return str[l];
+        } else {
+            int mid = (l + r) / 2;
+            String leftStr = loopCommonPrefix(str, l, mid);
+            String rightStr = loopCommonPrefix(str, mid + 1, r);
+            return compared(leftStr, rightStr);
+        }
+    }
+    private static String compared(String left, String right) {
+        int min = Math.min(left.length(), right.length());
+        for (int i = 0; i < min; i++) {
+            if (left.charAt(i) != right.charAt(i)) {
+                return left.substring(0, i);
+            }
+        }
+        return left.substring(0, min);
+    }
+
+
+    /**
+     * 二分查找法
+     * 找到数组中长度最小的字符串.
+     * 二分最小的字符串, 然后和数组中字符串循环比较, 如果前一半都满足, 那么至少前一半是公共的前缀. 比较后一半
+     * 如果前一半不满足, 那么继续二分比较
+     * */
+    private static String longestCommonPrefix5(String[] str) {
+        if (str == null || str.length <= 0) {
+            return "";
+        }
+        return loopCommonPrefix(str, 0, str.length - 1);
     }
 }
