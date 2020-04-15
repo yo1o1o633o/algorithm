@@ -17,10 +17,12 @@ public class LongestCommonPrefix {
         String res2 = longestCommonPrefix2(str);
         String res3 = longestCommonPrefix3(str);
         String res4 = longestCommonPrefix4(str);
+        String res5 = longestCommonPrefix5(str);
         System.out.println(res);
         System.out.println(res2);
         System.out.println(res3);
         System.out.println(res4);
+        System.out.println(res5);
     }
 
     /**
@@ -145,6 +147,31 @@ public class LongestCommonPrefix {
         if (str == null || str.length <= 0) {
             return "";
         }
-        return loopCommonPrefix(str, 0, str.length - 1);
+        int min = Integer.MAX_VALUE;
+        for (String s : str) {
+            if (s.length() < min) {
+                min = s.length();
+            }
+        }
+        int low = 1;
+        int high = min;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (isCommonPrefix(str, mid)) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return str[0].substring(0, (low + high) / 2);
+    }
+    private static boolean isCommonPrefix(String[] str, int len) {
+        String per = str[0].substring(0, len);
+        for (int i = 1; i < str.length; i++) {
+            if (!str[i].startsWith(per)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
