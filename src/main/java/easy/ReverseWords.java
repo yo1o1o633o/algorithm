@@ -73,12 +73,12 @@ public class ReverseWords {
         }
         StringBuilder r = new StringBuilder();
         StringBuilder n = new StringBuilder();
-        for (int i = 0; i < c.length; i++) {
-            if (c[i] == ' ') {
+        for (char value : c) {
+            if (value == ' ') {
                 r.insert(0, " " + n);
                 n = new StringBuilder();
             } else {
-                n.append(c[i]);
+                n.append(value);
             }
         }
         r.insert(0, n);
