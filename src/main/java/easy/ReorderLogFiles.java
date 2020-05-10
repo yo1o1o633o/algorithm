@@ -1,6 +1,6 @@
 package easy;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ReorderLogFiles {
     /**
@@ -20,6 +20,8 @@ public class ReorderLogFiles {
     public static void main(String[] args) {
         String[] logs = {"a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"};
         System.out.println(Arrays.toString(reorderLogFiles(logs)));
+        System.out.println(Arrays.toString(reorderLogFiles2(logs)));
+        System.out.println(Arrays.toString(reorderLogFiles3(logs)));
     }
 
     /**
@@ -56,6 +58,74 @@ public class ReorderLogFiles {
             }
             return isDigit1 ? (isDigit2 ? 0 : 1) : -1;
         });
-        return new String[0];
+        return logs;
+    }
+
+
+    private static String[] reorderLogFiles2(String[] logs) {
+        List<String> letterList = new ArrayList<>();
+        List<String> numberList = new ArrayList<>();
+        for (String log : logs) {
+            char c = log.charAt(log.indexOf(" ") + 1);
+            if (c > '0' && c <= '9') {
+                numberList.add(log);
+            } else {
+                letterList.add(log);
+            }
+        }
+        Collections.sort(letterList, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                int s1 = o1.indexOf(" ");
+                // 标识符
+                String sig1 = o1.substring(0, s1);
+                // 标识符以外的内容
+                String w1 = o1.substring(s1 + 1);
+
+                int s2 = o2.indexOf(" ");
+                String sig2 = o2.substring(0, s2);
+                String w2 = o2.substring(s2 + 1);
+
+                int cmp = w1.compareTo(w2);
+                if (cmp == 0) {
+                    return sig1.compareTo(sig2);
+                }
+                return cmp;
+            }
+        });
+        letterList.addAll(numberList);
+        return letterList.toArray(new String[letterList.size()]);
+    }
+
+    private static String[] reorderLogFiles3(String[] logs) {
+        List<String> letterList = new ArrayList<>();
+        List<String> numberList = new ArrayList<>();
+        for (String log : logs) {
+            char c = log.charAt(log.indexOf(" ") + 1);
+            if (c > '0' && c <= '9') {
+                numberList.add(log);
+            } else {
+                letterList.add(log);
+            }
+        }
+        letterList.sort((o1, o2) -> {
+            int s1 = o1.indexOf(" ");
+            // 标识符
+            String sig1 = o1.substring(0, s1);
+            // 标识符以外的内容
+            String w1 = o1.substring(s1 + 1);
+
+            int s2 = o2.indexOf(" ");
+            String sig2 = o2.substring(0, s2);
+            String w2 = o2.substring(s2 + 1);
+
+            int cmp = w1.compareTo(w2);
+            if (cmp == 0) {
+                return sig1.compareTo(sig2);
+            }
+            return cmp;
+        });
+        letterList.addAll(numberList);
+        return letterList.toArray(new String[0]);
     }
 }
