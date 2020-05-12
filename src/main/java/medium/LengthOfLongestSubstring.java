@@ -13,6 +13,7 @@ public class LengthOfLongestSubstring {
     public static void main(String[] args) {
         String s = "abcabcbb";
         System.out.println(lengthOfLongestSubstring(s));
+        System.out.println(lengthOfLongestSubstring2(s));
     }
 
     /**
@@ -36,5 +37,28 @@ public class LengthOfLongestSubstring {
             set = new HashSet<>();
         }
         return num;
+    }
+
+    /**
+     * 窗口移动
+     * 维持两个指针
+     * 一个为起始位， 一个用于循环计数
+     * 如果发现有相同的字符， 那么起始位移动。否则计数累计
+     * */
+    private static int lengthOfLongestSubstring2(String s) {
+        Set<Character> set = new HashSet<>();
+        int n = s.length();
+        int rk = -1, ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (i != 0) {
+                set.remove(s.charAt(i - 1));
+            }
+            while (rk + 1 < n && !set.contains(s.charAt(rk + 1))) {
+                set.add(s.charAt(rk + 1));
+                ++rk;
+            }
+            ans = Math.max(ans, rk - i + 1);
+        }
+        return ans;
     }
 }
