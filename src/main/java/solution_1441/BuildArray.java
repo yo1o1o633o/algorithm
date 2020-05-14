@@ -56,6 +56,9 @@ public class BuildArray {
         return res;
     }
 
+    /**
+     * 双指针
+     * */
     private static List<String> buildArray2(int[] target, int n) {
         int i = 0;
         int j = 1;
