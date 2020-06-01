@@ -13,7 +13,7 @@ public class KidsWithCandies {
      * 对每一个孩子，检查是否存在一种方案，将额外的 extraCandies 个糖果分配给孩子们之后，此孩子有 最多 的糖果。注意，允许有多个孩子同时拥有 最多 的糖果数目。
      * */
     public static void main(String[] args) {
-        int[] candies = {2,3,5,1,3};
+        int[] candies = {2, 3, 5, 1, 3};
         int extraCandies = 3;
         System.out.println(kidsWithCandies(candies, extraCandies));
     }
