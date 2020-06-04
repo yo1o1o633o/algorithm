@@ -10,7 +10,7 @@ public class ValidWordAbbreviation {
      * 字符串 "word" 的所有有效缩写为：
      *
      * ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
-     * 注意单词 "word" 的所有有效缩写仅包含以上这些。任何其他的字符串都不是 "word" 的有效缩写。 
+     * 注意单词 "word" 的所有有效缩写仅包含以上这些。任何其他的字符串都不是 "word" 的有效缩写。
      * */
     public static void main(String[] args) {
         String word = "a";
