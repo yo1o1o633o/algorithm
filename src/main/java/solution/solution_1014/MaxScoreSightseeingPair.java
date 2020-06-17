@@ -27,24 +27,4 @@ public class MaxScoreSightseeingPair {
         }
         return ans;
     }
-
-    private static int maxScoreSightseeingPair1(int[] A) {
-        int max = 0;
-        int maxIndex = 0;
-        for (int i = 0; i < A.length; i++) {
-            A[i] = A[i] - i;
-            if (A[i] > max) {
-                max = A[i];
-                maxIndex = i;
-            }
-        }
-        int second = 0;
-        for (int j = 0; j < A.length; j++) {
-            if (j == maxIndex) {
-                continue;
-            }
-            second = Math.max(A[j], second);
-        }
-        return max + second;
-    }
 }
