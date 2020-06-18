@@ -59,11 +59,11 @@ public class BfsTemplate {
                     if (head.val == target.val) {
                         return step;
                     }
-                    if (set.contains(head.left)) {
+                    if (!set.contains(head.left)) {
                         queue.add(head.left);
                         set.add(head.left);
                     }
-                    if (set.contains(head.right)) {
+                    if (!set.contains(head.right)) {
                         queue.add(head.right);
                         set.add(head.right);
                     }
