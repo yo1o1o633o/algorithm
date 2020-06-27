@@ -3,6 +3,7 @@ package probe.array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class SetZeroes {
     /**
@@ -29,14 +30,10 @@ public class SetZeroes {
             }
         }
         for (int r : row) {
-            for (int j = 0; j < matrix[r].length; j++) {
-                matrix[r][j] = 0;
-            }
+            IntStream.range(0, matrix[r].length).forEach(j -> matrix[r][j] = 0);
         }
         for (int c : col) {
-            for (int j = 0; j < matrix.length; j++) {
-                matrix[j][c] = 0;
-            }
+            IntStream.range(0, matrix.length).forEach(j -> matrix[j][c] = 0);
         }
         System.out.println(Arrays.deepToString(matrix));
     }
