@@ -17,27 +17,19 @@ public class MinSubArrayLen {
      * 双指针. 一个记录头部一个记录尾部.  出现大于s的值就计算头尾区间.  最后保存最大区间个数
      * */
     private static int minSubArrayLen(int s, int[] nums) {
-        int i = 0;
-        int j = 0;
-        int res = 0;
+        int end = 0;
+        int start = 0;
+        int ans = 0;
         int min = Integer.MAX_VALUE;
-        while (i < nums.length) {
-            res = res + nums[i];
-            if (res >= s) {
-                while (j < i) {
-                    if (res - nums[j] < s) {
-                        break;
-                    }
-                    res = res - nums[j];
-                    j++;
-                }
-                min = Math.min(min, i - j + 1);
+        while (end < nums.length) {
+            ans += nums[end];
+            while (ans >= s) {
+                min = Math.min(min, end - start + 1);
+                ans -= nums[start];
+                start++;
             }
-            i++;
+            end++;
         }
-        if (min == Integer.MAX_VALUE) {
-            return 0;
-        }
-        return min;
+        return min == Integer.MAX_VALUE ? 0 : min;
     }
 }
