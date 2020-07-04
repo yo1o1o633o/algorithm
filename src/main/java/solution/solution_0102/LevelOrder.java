@@ -24,7 +24,7 @@ public class LevelOrder {
     }
 
     /**
-     * 基本的广度搜索. 入参为null特殊判断一下. 
+     * 基本的广度搜索. 入参为null特殊判断一下.
      * */
     private static List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
