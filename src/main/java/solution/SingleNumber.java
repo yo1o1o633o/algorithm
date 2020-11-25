@@ -10,6 +10,8 @@ import java.util.Set;
  * 说明：
  *
  * 你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
+ *
+ * @author shuai.yang
  * */
 public class SingleNumber {
     public static void main(String[] args) {
