@@ -7,7 +7,7 @@ import java.util.Stack;
 
 /**
  * 206. 反转链表
- * 
+ *
  * 反转一个单链表。
  * */
 public class Solution {
