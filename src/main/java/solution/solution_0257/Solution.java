@@ -31,15 +31,13 @@ public class Solution {
         if (root == null) {
             return;
         }
-        val = val.equals("") ? String.valueOf(root.val) : val + "->" + root.val;
-        if (root.left != null) {
-            recursion(root.left, val, res);
-        }
-        if (root.right != null) {
-            recursion(root.right, val, res);
-        }
+        val += String.valueOf(root.val);
         if (root.left == null && root.right == null) {
             res.add(val);
+        } else {
+            val += "->";
+            recursion(root.left, val, res);
+            recursion(root.right, val, res);
         }
     }
 
