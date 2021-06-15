@@ -62,6 +62,10 @@ public class Solution {
         return false;
     }
 
+    /**
+     * 从下向上。 如果第一个元素大于目标值， 跳过这一行， 向上一行
+     * 如果第一个元素小于目标值， 则遍历这一行。 该行每一个比目标值小的元素，其对应的所在列都可以跳过
+     * */
     private static boolean findNumberIn2DArray3(int[][] matrix, int target) {
         int i = matrix.length - 1, j = 0;
         while (i >= 0 && j < matrix[0].length) {
